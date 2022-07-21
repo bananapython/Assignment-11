@@ -3,8 +3,20 @@ import sys
 # Add Your functions here
 
 def max_profit(money, prices, increases):
-    pass
+    margin = 0
+    chosen_houses = pick_houses(money, prices, increases)
+    
+    for price in chosen_houses:
+        margin += price * chosen_houses[price]
+        
+    return margin
 
+
+"""
+Returns a dictionary of the house prices with their corresponding increase 
+in value that can be bought with the initial investment that maximizes the
+profit earned after 1 year 
+"""
 def pick_houses(money, prices, increases):
     pass
 # You are allowed to change the main function. 
