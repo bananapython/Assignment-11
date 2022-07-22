@@ -3,22 +3,23 @@ import sys
 # Add Your functions here
 
 def max_profit(money, prices, increases):
-    total_profit = 0
     profits = [prices[i] * increases[i] / 100 for i in range(len(prices))]
-    chosen = pick_houses(money, prices, profits)
     
-    for profit in chosen:
-        total_profit += profit
-        
-    return total_profit
+    table = [[0 for i in range(money + 1)] for i in range(len(prices) + 1)]
+    
+    for i in range(1, len(prices) + 1):
+        for j in range(1, money + 1):
+            if prices[i - 1] > j:
+                table[i][j] = table[i-1][j]
+            else:
+                table[i][j] = max(table[i][j - prices[i - 1]] + profits[i - 1], table[i - 1][j])
+    
+    return table[len(prices)][money]
+    
+    
+    
+   
 
-
-"""
-Returns a list of the profits stemming from the initial house purchases 
-not exceeding the starting money that yield the maximum return     
-"""
-def pick_houses(money, prices, profits):
-    pass
 # You are allowed to change the main function. 
 
 # Do not change the template file name. 
@@ -66,4 +67,3 @@ def main():
 
     
 main()
-
